@@ -1,7 +1,5 @@
 apply plugin: 'android-library'
 
-
-version = "0.1.0"
 group = "org.yshi.cursor"
 
 android {
