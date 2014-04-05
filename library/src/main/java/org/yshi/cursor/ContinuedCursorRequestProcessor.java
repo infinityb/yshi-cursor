@@ -1,5 +1,6 @@
 package org.yshi.cursor;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -67,7 +68,7 @@ public class ContinuedCursorRequestProcessor<ItemType>
     }
 
     @Override
-    public HashMap<String, String> getHeaders() {
+    public HashMap<String, String> getHeaders() throws AuthFailureError {
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.putAll(m_state.getHeaders());
         return headers;
