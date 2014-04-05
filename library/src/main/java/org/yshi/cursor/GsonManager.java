@@ -17,6 +17,7 @@ public class GsonManager {
         if (M_GSON_MANAGER == null) {
             M_GSON_MANAGER = new GsonManager();
         }
+
         return M_GSON_MANAGER;
     }
 
