@@ -1,5 +1,7 @@
 apply plugin: 'android-library'
+apply plugin: 'maven'
 
+archivesBaseName = "library"
 group = "org.yshi.cursor"
 
 android {
