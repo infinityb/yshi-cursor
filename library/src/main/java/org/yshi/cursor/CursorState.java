@@ -75,12 +75,12 @@ abstract public class CursorState<ItemType> {
         switch (direction) {
             case (LEFT):
                 m_left_prev_coll = coll;
-                m_backed_collection.merge(direction, coll);
+                // m_backed_collection.merge(direction, coll);
                 m_left_is_requesting = false;
                 break;
             case (RIGHT):
                 m_right_prev_coll = coll;
-                m_backed_collection.merge(direction, coll);
+                // m_backed_collection.merge(direction, coll);
                 m_right_is_requesting = false;
                 break;
             default:
@@ -112,7 +112,7 @@ abstract public class CursorState<ItemType> {
         return new Response.Listener<CursorCollection<ItemType>>() {
             @Override
             public void onResponse(CursorCollection<ItemType> coll) {
-                m_backed_collection.merge(direction, coll);
+                // m_backed_collection.merge(direction, coll);
                 callback.onResponse(coll);
             }
         };
