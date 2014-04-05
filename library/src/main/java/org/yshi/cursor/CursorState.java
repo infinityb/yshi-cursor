@@ -2,6 +2,7 @@ package org.yshi.cursor;
 
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -173,8 +174,7 @@ abstract public class CursorState<ItemType> {
                 getErrback(direction, errback));
     }
 
-    public Map<String, String> getHeaders() {
+    public Map<String, String> getHeaders() throws AuthFailureError {
         return new TreeMap<String, String>();
     }
-
 }
