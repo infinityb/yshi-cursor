@@ -1,5 +1,6 @@
 package org.yshi.cursor;
 
+import android.app.AlertDialog;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -28,9 +29,7 @@ abstract public class CursorState<ItemType> {
     private CursorCollection<ItemType> m_right_prev_coll = null;
     private BackedCollection<ItemType> m_backed_collection = null;
 
-    public CursorState(
-            BackedCollection<ItemType> backed_collection
-    ) {
+    public CursorState(BackedCollection<ItemType> backed_collection) {
         m_initial_is_requesting = true;
         m_backed_collection = backed_collection;
     }
@@ -41,9 +40,9 @@ abstract public class CursorState<ItemType> {
 
     private CursorCollection<ItemType> prevCollFromDirection(int direction) {
         switch (direction) {
-            case (LEFT):
+            case LEFT:
                 return m_left_prev_coll;
-            case (RIGHT):
+            case RIGHT:
                 return m_right_prev_coll;
             default:
                 throw new RuntimeException("invalid direction");
@@ -131,17 +130,11 @@ abstract public class CursorState<ItemType> {
         };
     }
 
+    @Deprecated
     public synchronized boolean firstRequestFinished() {
         return !m_initial_is_requesting;
     }
 
-    /**
-     * @param direction
-     * @param callback
-     * @param errback
-     * @return
-     * @throws AlreadyRequesting
-     */
     public synchronized Request<CursorCollection<ItemType>> nextRequest(
             int direction,
             Response.Listener<CursorCollection<ItemType>> callback,
@@ -149,11 +142,11 @@ abstract public class CursorState<ItemType> {
     ) throws AlreadyRequesting, TerminalCollection {
 
         switch (direction) {
-            case (LEFT):
+            case LEFT:
                 if (m_left_is_requesting)
                     throw new AlreadyRequesting();
                 break;
-            case (RIGHT):
+            case RIGHT:
                 if (m_right_is_requesting)
                     throw new AlreadyRequesting();
                 break;

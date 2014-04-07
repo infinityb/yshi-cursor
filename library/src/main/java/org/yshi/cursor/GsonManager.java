@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 /**
  * Created by sell on 20/11/13.
  */
+@Deprecated
 public class GsonManager {
     private static GsonManager M_GSON_MANAGER;
     private Gson m_gson;

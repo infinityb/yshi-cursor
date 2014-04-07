@@ -47,20 +47,24 @@ public class CursorCollection<ItemType> {
 
     public String getToken(int direction) {
         switch (direction) {
-            case (CursorState.LEFT):
+            case CursorState.LEFT:
                 return m_left_token;
-            case (CursorState.RIGHT):
+            case CursorState.RIGHT:
                 return m_right_token;
             default:
                 throw new RuntimeException("invalid direction");
         }
     }
 
+    /**
+     * @param direction CursorState.LEFT | CursorState.RIGHT
+     * @return whether we've reached the final record in this direction
+     */
     public boolean isTerminal(int direction) {
         switch (direction) {
-            case (CursorState.LEFT):
+            case CursorState.LEFT:
                 return m_left_is_terminal;
-            case (CursorState.RIGHT):
+            case CursorState.RIGHT:
                 return m_right_is_terminal;
             default:
                 throw new RuntimeException("invalid direction");

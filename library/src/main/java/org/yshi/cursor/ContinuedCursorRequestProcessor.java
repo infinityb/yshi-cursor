@@ -1,7 +1,6 @@
 package org.yshi.cursor;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -12,38 +11,35 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by sell on 20/11/13.
  */
-public class ContinuedCursorRequestProcessor<ItemType>
-        extends Request<CursorCollection<ItemType>>
-        implements CursorRequestProcessor<ItemType>
-{
+// Request<CursorCollection<ItemType>>
+public class ContinuedCursorRequestProcessor<ItemType> extends AbstractRequestProcessor<ItemType> {
 
     public final int m_direction;
-    public final CursorState<ItemType> m_state;
-    public final Response.Listener<CursorCollection<ItemType>> m_callback;
     public final Class<ItemType> m_clazz;
 
     public static String getUrl(CursorState<?> state, int direction) {
         return state.getNextUrl(direction);
     }
 
-    public ContinuedCursorRequestProcessor(CursorState<ItemType> state, int direction, Class<ItemType> clazz,
-                                           Response.Listener<CursorCollection<ItemType>> callback,
-                                           Response.ErrorListener errback
+    public ContinuedCursorRequestProcessor(
+            CursorState<ItemType> state, int direction, Class<ItemType> clazz,
+            Response.Listener<CursorCollection<ItemType>> callback,
+            Response.ErrorListener errback
     ) {
-        super(Method.GET, getUrl(state, direction), errback);
+        super(state, getUrl(state, direction), callback, errback);
         m_direction = direction;
-        m_state = state;
-        m_callback = callback;
         m_clazz = clazz;
     }
 
     @Override
     protected Response<CursorCollection<ItemType>> parseNetworkResponse(NetworkResponse response) {
+
         try {
             JsonParser parser = new JsonParser();
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
@@ -58,19 +54,7 @@ public class ContinuedCursorRequestProcessor<ItemType>
         }
     }
 
-    @Override
-    protected void deliverResponse(CursorCollection<ItemType> rr) {
-        m_callback.onResponse(rr);
-    }
-
     protected Class<ItemType> getResponseType() {
         return m_clazz;
-    }
-
-    @Override
-    public HashMap<String, String> getHeaders() throws AuthFailureError {
-        HashMap<String, String> headers = new HashMap<String, String>();
-        headers.putAll(m_state.getHeaders());
-        return headers;
     }
 }

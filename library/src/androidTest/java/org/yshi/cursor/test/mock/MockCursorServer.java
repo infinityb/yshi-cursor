@@ -82,7 +82,6 @@ public class MockCursorServer implements CursorServer {
             int end_index = start_index - limit;
             last_index = start_index - 1;
             for (int i = start_index - 1; Math.max(end_index, 0) <= i; i -= 1) {
-                Log.e(TAG, String.format("running cursor=%s .. for(i=%d)", cursor, i));
                 result_array.add(m_obj.get(i));
                 last_index = i;
             }
