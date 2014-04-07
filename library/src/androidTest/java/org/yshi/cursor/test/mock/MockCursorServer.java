@@ -1,7 +1,5 @@
 package org.yshi.cursor.test.mock;
 
-import android.util.Log;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -60,7 +58,6 @@ public class MockCursorServer implements CursorServer {
     public JsonObject get(String cursor, int limit) {
         JsonObject out = new JsonObject();
         Direction direction = Direction.fromChar(cursor.charAt(0));
-        Log.e(TAG, String.format("starting with cursor=%s", cursor));
         int left_cursor, right_cursor;
         int start_index = Integer.parseInt(cursor.substring(1));
 

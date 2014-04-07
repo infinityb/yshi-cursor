@@ -5,7 +5,6 @@ import org.yshi.cursor.test.interfaces.CursorServer;
 import org.yshi.cursor.test.mock.MockCursorServer;
 
 import android.test.AndroidTestCase;
-import android.util.Log;
 
 import com.google.gson.JsonObject;
 
@@ -30,7 +29,6 @@ public class BasicIntegrationTest extends AndroidTestCase {
         assertFalse(response1.get("right_is_terminal").getAsBoolean());
 
         JsonObject response2 = cursor_server.get(response1.get("left_cursor").getAsString(), 3);
-        Log.e(TAG, String.format("response2 = %s", response2.toString()));
         assertEquals(response2.get("left_cursor").getAsString(), "b0");
         assertTrue(response2.get("left_is_terminal").getAsBoolean());
         assertEquals(response2.get("right_cursor").getAsString(), "a2");

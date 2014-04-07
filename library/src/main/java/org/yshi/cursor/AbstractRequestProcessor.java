@@ -30,7 +30,8 @@ abstract public class AbstractRequestProcessor<ItemType> extends Request<CursorC
 
     @Override
     protected void deliverResponse(CursorCollection<ItemType> rr) {
-        if (m_callback != null) m_callback.onResponse(rr);
+        if (m_callback != null)
+            m_callback.onResponse(rr);
     }
 
     abstract protected Class<ItemType> getResponseType();
